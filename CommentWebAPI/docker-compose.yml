@@ -1,0 +1,27 @@
+version: '1.0'
+
+services:
+  
+  # Database - Mongo DB
+  mongo:
+    image: mongo:5.0.23-focal
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+ 
+  # Redis
+  redis:
+    image: myredis
+    restart: always
+    ports:
+    -  "6379:6379"
+    
+  # backend - .NET
+  web:
+    #build: .
+    image: webapp
+    ports:
+    - "7020:7020"
+        
